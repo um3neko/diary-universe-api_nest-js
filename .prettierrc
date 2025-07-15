@@ -1,4 +1,15 @@
 {
+  "useTabs": true,
+  "tabWidth": 4,
   "singleQuote": true,
-  "trailingComma": "all"
+  "semi": true,
+  "trailingComma": "all",
+  "bracketSpacing": false,
+  "arrowParens": "avoid",
+  "printWidth": 100,
+  "endOfLine": "lf",
+
+  "importOrder": ["^(react|next|vue)$", "^[a-z]", "^@/", "^\\.", "^.+\\.scss$"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
