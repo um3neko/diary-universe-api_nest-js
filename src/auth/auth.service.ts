@@ -11,6 +11,10 @@ const fakeUser = [
 		email: '2',
 		password: 'pass2',
 	},
+	{
+		email: 'q',
+		password: 'q',
+	},
 ];
 
 @Injectable()
@@ -27,15 +31,16 @@ export class AuthService {
 	}
 
 	//to change
-	generateJwt(authPayloadDto: AuthPayloadDTO) {
+	async generateJwt(authPayloadDto: AuthPayloadDTO) {
 		const user: any = authPayloadDto;
 		const payload = {
 			sub: user.id,
 			email: user.email,
 		};
 
+
 		return {
-			access_token: this.jwtService.sign(payload, {expiresIn: '1h'}),
+			accessToken: this.jwtService.sign(payload, {expiresIn: '1h'}),
 		};
 	}
 }
