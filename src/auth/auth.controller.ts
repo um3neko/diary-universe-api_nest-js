@@ -11,13 +11,13 @@ export class AuthController {
 
 	@Post('login')
 	@UseGuards(LocalGuard)
-	login(@Body() authPayload: AuthPayloadDTO) {
-		return this.authService.generateJwt(authPayload);
+	async login(@Body() authPayload: AuthPayloadDTO) {
+		return await this.authService.generateJwt(authPayload);
 	}
 
 	@Get('test')
 	@UseGuards(JwtAuthGuard)
-	test(@Req() req: Request) {
+	async test(@Req() req: Request) {
 		console.log(req);
 		console.log(req.user);
 	}
