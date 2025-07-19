@@ -38,7 +38,6 @@ export class AuthService {
 			email: user.email,
 		};
 
-
 		return {
 			accessToken: this.jwtService.sign(payload, {expiresIn: '1h'}),
 		};
