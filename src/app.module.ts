@@ -1,9 +1,9 @@
 import {Module} from '@nestjs/common';
 import {ConfigModule} from '@nestjs/config';
 import {TypeOrmModule} from '@nestjs/typeorm';
-import {BookDomainModule} from './book-domain/book-domain.module';
-import {AuthModule} from './auth/auth.module';
-import {typeOrmConfig} from './constants/typeorm.config';
+import {AuthModule} from './modules/auth/auth.module';
+import {typeOrmConfig} from './infrastructure/typeorm.config';
+import {BookModule} from './modules/book/book.module';
 
 @Module({
 	imports: [
@@ -12,7 +12,7 @@ import {typeOrmConfig} from './constants/typeorm.config';
 		}),
 		AuthModule,
 		TypeOrmModule.forRoot(typeOrmConfig),
-		BookDomainModule,
+		BookModule,
 	],
 })
 export class AppModule {}
