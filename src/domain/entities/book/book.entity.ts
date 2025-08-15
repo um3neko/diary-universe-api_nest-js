@@ -11,8 +11,8 @@ export class Book extends BaseDomainEntity {
 
 		public title: string,
 		public author: string,
-		public extension: Extension,
-		public language: Language,
+		public extension: Extension | null,
+		public language: Language | null,
 		public bookChapters: BookChapter[],
 	) {
 		super(id, createdAt, updatedAt);
@@ -21,8 +21,8 @@ export class Book extends BaseDomainEntity {
 	public static create(props: {
 		title: string;
 		author: string;
-		extension: Extension;
-		language: Language;
+		extension: Extension | null;
+		language: Language | null;
 		bookChapters: BookChapter[];
 	}): Book {
 		const id = crypto.randomUUID();
@@ -45,8 +45,8 @@ export class Book extends BaseDomainEntity {
 		updatedAt: Date;
 		title: string;
 		author: string;
-		extension: Extension;
-		language: Language;
+		extension: Extension | null;
+		language: Language | null;
 		bookChapters: BookChapter[];
 	}): Book {
 		return new Book(

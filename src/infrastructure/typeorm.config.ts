@@ -1,8 +1,5 @@
 import 'dotenv/config';
 import {TypeOrmModuleOptions} from '@nestjs/typeorm';
-import {BookChapterOrmEntity} from './entities/bookChapter/bookChapter.typeorm';
-import {UserOrmEntity} from './entities/user/user.typeorm';
-import {BookOrmEntity} from './entities/book/book.typeorm';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
 	type: 'postgres',
@@ -11,6 +8,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
 	username: process.env.DB_USERNAME,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
-	entities: [BookChapterOrmEntity, UserOrmEntity, BookOrmEntity],
+	entities: [__dirname + '/../**/*.typeorm.{ts,js}'],
 	synchronize: true,
 };

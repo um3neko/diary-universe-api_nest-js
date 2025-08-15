@@ -2,7 +2,7 @@
 import { BaseDomainLookupEntity } from '../baseLookup';
 
 export class Extension extends BaseDomainLookupEntity {
-	private constructor(
+	constructor(
 		id: string,
 		createdAt: Date,
 		updatedAt: Date,

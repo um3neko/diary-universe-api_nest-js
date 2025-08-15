@@ -1,4 +1,4 @@
-import { BaseDomainEntity } from '../baseEntity';
+import {BaseDomainEntity} from '../baseEntity';
 
 export class WordContext extends BaseDomainEntity {
 	private constructor(
@@ -42,4 +42,7 @@ export class WordContext extends BaseDomainEntity {
 			props.isCapitalized,
 			props.punctuationAfter,
 			props.isLastInSentence,
-			props.isInteractive
+			props.isInteractive,
+		);
+	}
+}

@@ -11,8 +11,8 @@ import {BookModule} from './modules/book/book.module';
 			isGlobal: true,
 		}),
 		AuthModule,
-		TypeOrmModule.forRoot(typeOrmConfig),
 		BookModule,
+		TypeOrmModule.forRoot(typeOrmConfig),
 	],
 })
 export class AppModule {}

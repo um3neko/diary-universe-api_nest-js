@@ -1,6 +1,6 @@
 import {HttpException, Inject, Injectable, UnauthorizedException} from '@nestjs/common';
 import {JwtService} from '@nestjs/jwt';
-import {UserRepository} from 'src/domain/entities/user/user.repository';
+import { IUserRepository } from 'src/domain/entities/user/user.repository';
 import {
 	TypeOrmUserRepository,
 	TypeOrmUserRepositoryToken,
@@ -26,15 +26,16 @@ const fakeUser = [
 export class AuthService {
 	constructor(
 		private jwtService: JwtService,
-		@Inject(TypeOrmUserRepositoryToken) private readonly authRepository: UserRepository,
+		@Inject(TypeOrmUserRepositoryToken) private readonly authRepository: IUserRepository,
 	) {}
 
 	async validate(authPayloadDto: AuthPayloadDTO) {
 		const user = fakeUser.find(u => u.email === authPayloadDto.email);
-		
+
 		if (!user || user.password !== authPayloadDto.password) {
 			throw new UnauthorizedException('Invalid credentials');
 		}
+
 		const {password: _, ...userData} = user;
 		return userData;
 	}

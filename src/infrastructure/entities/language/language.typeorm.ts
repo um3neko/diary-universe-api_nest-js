@@ -2,5 +2,5 @@ import {Entity, PrimaryColumn, Column} from 'typeorm';
 import {BaseOrmEntity} from '../../base/baseOrmEntity';
 import {BaseLookupOrmEntity} from '../../base/baseLookupOrmEntity';
 
-@Entity('extension')
-export class ExtensionOrmEntity extends BaseLookupOrmEntity {}
+@Entity('language')
+export class LanguageOrmEntity extends BaseLookupOrmEntity {}

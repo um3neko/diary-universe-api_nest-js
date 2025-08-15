@@ -1,7 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
 import {BaseOrmEntity} from '../../base/baseOrmEntity';
 
-@Entity()
+@Entity('user')
 export class UserOrmEntity extends BaseOrmEntity {
 	@Column()
 	username: string;

@@ -1,19 +1,25 @@
 import {Repository} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';
 import {User} from 'src/domain/entities/user/user.entity';
-import {UserRepository} from 'src/domain/entities/user/user.repository';
 import {UserOrmEntity} from './user.typeorm';
 import {UserMapper} from './user.mapper';
 import {Injectable} from '@nestjs/common/decorators/core/injectable.decorator';
+import {BaseRepository} from 'src/infrastructure/base/baseRepository';
+import {IUserRepository} from 'src/domain/entities/user/user.repository';
 
 export const TypeOrmUserRepositoryToken = Symbol('TypeOrmUserRepository');
 
 @Injectable()
-export class TypeOrmUserRepository implements UserRepository {
+export class TypeOrmUserRepository
+	extends BaseRepository<UserOrmEntity, User>
+	implements IUserRepository
+{
 	constructor(
 		@InjectRepository(UserOrmEntity)
-		private readonly repo: Repository<UserOrmEntity>,
-	) {}
+		repo: Repository<UserOrmEntity>,
+	) {
+		super(repo, UserMapper);
+	}
 
 	async authenticate(email: string, password: string): Promise<User | null> {
 		const userOrm = await this.repo.findOne({where: {email}});
@@ -23,22 +29,8 @@ export class TypeOrmUserRepository implements UserRepository {
 		return user;
 	}
 
-	async findById(id: string): Promise<User | null> {
-		const ormUser = await this.repo.findOne({where: {id}});
-		return this.toDomainOrNull(ormUser);
-	}
-
 	async findByEmail(email: string): Promise<User | null> {
 		const ormUser = await this.repo.findOne({where: {email}});
 		return this.toDomainOrNull(ormUser);
-	}
-
-	async save(user: User): Promise<void> {
-		const entity = UserMapper.toOrm(user);
-		await this.repo.save(entity);
-	}
-
-	private toDomainOrNull(entity: UserOrmEntity | null): User | null {
-		return entity ? UserMapper.toDomain(entity) : null;
 	}
 }

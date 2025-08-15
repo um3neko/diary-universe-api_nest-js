@@ -1,7 +1,7 @@
 import {BaseDomainLookupEntity} from '../baseLookup';
 
 export class Language extends BaseDomainLookupEntity {
-	private constructor(id: string, createdAt: Date, updatedAt: Date, code: string, value: string) {
+	constructor(id: string, createdAt: Date, updatedAt: Date, code: string, value: string) {
 		super(id, createdAt, updatedAt, code, value);
 	}
 
