@@ -7,7 +7,7 @@ export class BookChapter extends BaseDomainEntity {
 		createdAt: Date,
 		updatedAt: Date,
 		public readonly bookId: string,
-		public readonly order: number,
+		public readonly chunkNumber: number,
 		public readonly wordCount: number,
 		public readonly completed: boolean,
 		//TODO remove, keep as sentences
@@ -22,7 +22,7 @@ export class BookChapter extends BaseDomainEntity {
 		createdAt: Date;
 		updatedAt: Date;
 		bookId: string;
-		order: number;
+		chunkNumber: number;
 		wordCount: number;
 		completed: boolean;
 		text: string;
@@ -33,7 +33,7 @@ export class BookChapter extends BaseDomainEntity {
 			props.createdAt,
 			props.updatedAt,
 			props.bookId,
-			props.order,
+			props.chunkNumber,
 			props.wordCount,
 			props.completed,
 			props.text,

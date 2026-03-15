@@ -1,11 +1,11 @@
 import {Controller, Get, Query} from '@nestjs/common';
-import {BookPreviewDtoResponse} from '../../dto/bookPreviewDtoResponse';
+import {BookChunksPreviewDtoResponse, BookPreviewDtoResponse} from '../../dto/bookPreviewDtoResponse';
 import {BookService} from '../../services/book/book.service';
+import { BookChapterOrmEntity } from 'src/infrastructure/entities/bookChapter/bookChapter.typeorm';
 
 @Controller('book')
 export class BookController {
 	constructor(private bookService: BookService) {}
-
 
 	//http://localhost:3000/book?page=1&limit=10
 	@Get()
@@ -15,5 +15,13 @@ export class BookController {
 	): Promise<BookPreviewDtoResponse[]> {
 		console.log(page);
 		return this.bookService.getBooksPreview(page, limit);
+	}
+
+	@Get('preview/')
+	async getBookChunksPreview(
+		@Query('id') id
+	): Promise<BookChapterOrmEntity[]> {
+		console.log(id);
+		return this.bookService.getBookChunksById(id);
 	}
 }

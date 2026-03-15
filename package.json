@@ -11,8 +11,9 @@
 		"start": "nest start",
 
 		"typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource ./src/infrastructure/data-source.ts",
-		"m": "npm run typeorm -- migration:generate ./src/infrastructure/migrations/",
-		"me": "npm run typeorm -- migration:run",
+
+		"m1": "npm run typeorm -- migration:generate ./src/infrastructure/migrations/mig",
+		"m2": "npm run typeorm -- migration:run",
 		"dev": "nest start --watch",
 
 

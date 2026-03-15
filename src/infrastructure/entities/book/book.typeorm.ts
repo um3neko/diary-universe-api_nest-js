@@ -12,6 +12,9 @@ export class BookOrmEntity extends BaseOrmEntity {
 	@Column()
 	author: string;
 
+	@Column({type: 'timestamptz', nullable: true})
+	touchedAt: Date;
+
 	@ManyToOne(() => ExtensionOrmEntity)
 	@JoinColumn({name: 'extensionId'})
 	extension: ExtensionOrmEntity;

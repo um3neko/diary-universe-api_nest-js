@@ -12,9 +12,11 @@ import {
 import {BookService} from './services/book/book.service';
 import {BookController} from './controllers/book/book.controller';
 import {LanguageOrmEntity} from 'src/infrastructure/entities/language/language.typeorm';
+import { TypeOrmBookChapterRepository, TypeOrmBookChapterRepositoryToken } from 'src/infrastructure/entities/bookChapter/bookChapter.typeorm.repository';
+import { BookChapterOrmEntity } from 'src/infrastructure/entities/bookChapter/bookChapter.typeorm';
 
 @Module({
-	imports: [TypeOrmModule.forFeature([BookOrmEntity, ExtensionOrmEntity, LanguageOrmEntity])],
+	imports: [TypeOrmModule.forFeature([BookOrmEntity, BookChapterOrmEntity, ExtensionOrmEntity, LanguageOrmEntity])],
 	controllers: [BookController],
 	providers: [
 		BookService,
@@ -23,6 +25,10 @@ import {LanguageOrmEntity} from 'src/infrastructure/entities/language/language.t
 			provide: TypeOrmBookRepositoryToken,
 			useExisting: TypeOrmBookRepository,
 		},
+		TypeOrmBookChapterRepository, {
+			provide: TypeOrmBookChapterRepositoryToken,
+			useExisting: TypeOrmBookChapterRepository
+		}
 	],
 	exports: [
 		BookService,
