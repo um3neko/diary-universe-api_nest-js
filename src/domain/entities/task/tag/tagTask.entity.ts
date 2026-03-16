@@ -17,7 +17,7 @@ export class TaskTag extends BaseDomainEntity {
     return new TaskTag(id, now, now, name);
   }
 
-  public static restore(id: string, createdAt: Date, updatedAt: Date, name: string): Tag {
+  public static restore(id: string, createdAt: Date, updatedAt: Date, name: string): TaskTag {
     return new TaskTag(id, createdAt, updatedAt, name);
   }
 }

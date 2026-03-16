@@ -4,18 +4,19 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Book} from 'src/domain/entities/book/book.entity';
 import {BaseRepository} from 'src/infrastructure/base/baseRepository';
 import {IBookRepository} from 'src/domain/entities/book/book.repository';
-import { BookPreviewDtoResponse } from 'src/modules/book/dto/bookPreviewDtoResponse';
-import { BookChapter } from 'src/domain/entities/bookChapter/bookChapter.entity';
-import { BookChapterOrmEntity } from './bookChapter.typeorm';
-import { BookChapterMapper } from './bookChapter.mapper';
+
+import {BookChapter} from 'src/domain/entities/bookChapter/bookChapter.entity';
+import {BookChapterOrmEntity} from './bookChapter.typeorm';
+import {BookChapterMapper} from './bookChapter.mapper';
 
 export const TypeOrmBookChapterRepositoryToken = Symbol('TypeOrmBookChapterRepository');
 
 @Injectable()
-export class TypeOrmBookChapterRepository
-	extends BaseRepository<BookChapterOrmEntity, BookChapter>
-	// implements IBookRepository
-{
+// implements IBookRepository
+export class TypeOrmBookChapterRepository extends BaseRepository<
+	BookChapterOrmEntity,
+	BookChapter
+> {
 	constructor(
 		@InjectRepository(BookChapterOrmEntity)
 		repo: Repository<BookChapterOrmEntity>,
@@ -26,9 +27,8 @@ export class TypeOrmBookChapterRepository
 	//TODO: shuld return nice BookChunksPreviewDtoResponse
 	async findBookChunksPreviewById(id: string): Promise<BookChapterOrmEntity[]> {
 		const data = await this.repo.find({
-			where: { book: { id } },
+			where: {book: {id}},
 		});
 		return data;
 	}
-
 }

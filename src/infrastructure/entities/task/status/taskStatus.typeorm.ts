@@ -1,6 +1,6 @@
 import { BaseOrmEntity } from "src/infrastructure/base/baseOrmEntity";
 import { Entity, Column, OneToMany } from "typeorm";
-import { TaskStatusValueOrmEntity } from "../statusValue.typeorm.ts/taskStatusValue.typeorm";
+import { TaskStatusValueOrmEntity } from "../statusValue/taskStatusValue.typeorm";
 
 @Entity('task_status')
 export class TaskStatusOrmEntity extends BaseOrmEntity {
@@ -10,7 +10,7 @@ export class TaskStatusOrmEntity extends BaseOrmEntity {
 	  @Column()
 	  level: number;
 
-	  @OneToMany(() => TaskStatusValueOrmEntity, (value) => value.priority)
-	  values: TaskStatusValueOrmEntity[];
+	  @OneToMany(() => TaskStatusValueOrmEntity, (value) => value.status)
+	  statusValues: TaskStatusValueOrmEntity[];
 
 }

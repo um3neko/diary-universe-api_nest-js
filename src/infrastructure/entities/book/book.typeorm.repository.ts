@@ -6,7 +6,7 @@ import {BaseRepository} from 'src/infrastructure/base/baseRepository';
 import {BookMapper} from './book.mapper';
 import {BookOrmEntity} from './book.typeorm';
 import {IBookRepository} from 'src/domain/entities/book/book.repository';
-import { BookPreviewDtoResponse } from 'src/modules/book/dto/bookPreviewDtoResponse';
+
 
 export const TypeOrmBookRepositoryToken = Symbol('TypeOrmBookRepository');
 

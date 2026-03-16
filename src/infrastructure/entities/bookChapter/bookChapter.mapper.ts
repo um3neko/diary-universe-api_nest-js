@@ -1,35 +1,32 @@
-import {Book} from 'src/domain/entities/book/book.entity';
 import { BookChapterOrmEntity } from './bookChapter.typeorm';
 import { BookChapter } from 'src/domain/entities/bookChapter/bookChapter.entity';
 
 export class BookChapterMapper {
 	static toDomain(orm: BookChapterOrmEntity): BookChapter {
+		if (!orm) return null as any;
 		return BookChapter.restore({
 			id: orm.id,
 			createdAt: orm.createdAt,
 			updatedAt: orm.updatedAt,
-			bookId: orm.book.id,
-			completed: orm.completed,
+			bookId: orm.book?.id || '',
 			chunkNumber: orm.chapterNumber,
-			sentences: [],
-			text: 'qwer',
-			wordCount: orm.wordCount
+			wordCount: orm.wordCount,
+			completed: orm.completed,
+			text: orm.text,
+			sentences: [], // TODO: Load sentences separately or implement SentenceMapper
 		});
 	}
 
 	static toOrm(domain: BookChapter): BookChapterOrmEntity {
+		if (!domain) return null as any;
 		const orm = new BookChapterOrmEntity();
 		orm.id = domain.id;
-		// orm.title = domain.title;
-		// orm.author = domain.author;
-
-		// if (domain.extension) {
-		// 	orm.extension = {id: domain.extension.id} as ExtensionOrmEntity;
-		// }
-
-		// if (domain.language) {
-		// 	orm.language = {id: domain.language.id} as LanguageOrmEntity;
-		// }
+		orm.createdAt = domain.createdAt;
+		orm.updatedAt = domain.updatedAt;
+		orm.chapterNumber = domain.chunkNumber;
+		orm.wordCount = domain.wordCount;
+		orm.completed = domain.completed;
+		orm.text = domain.text;
 		return orm;
 	}
 }

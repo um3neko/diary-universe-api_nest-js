@@ -10,7 +10,7 @@ import { LanguageOrmEntity } from './entities/language/language.typeorm';
 
 import { TaskOrmEntity } from './entities/task/task.typeorm';
 import { TaskStatusOrmEntity } from './entities/task/status/taskStatus.typeorm';
-import { TaskStatusValueOrmEntity } from './entities/task/statusValue.typeorm.ts/taskStatusValue.typeorm';
+import { TaskStatusValueOrmEntity } from './entities/task/statusValue/taskStatusValue.typeorm';
 import { TagOrmEntity } from './entities/task/tag/taskTag.typeorm';
 import { TaskPriorityOrmEntity } from './entities/task/priority/taskPriority.typeorm';
 import { TaskPriorityValueOrmEntity } from './entities/task/priorityValue/taskPriorityValue.typeorm';
@@ -36,9 +36,6 @@ export default new DataSource({
 	TaskPriorityOrmEntity,
 	TaskPriorityValueOrmEntity,
 	TagOrmEntity,
-
-    TaskStatusOrmEntity,
-    TaskStatusValueOrmEntity
   ],
 
   migrations: ['./src/infrastructure/migrations/*{.ts,.js}'],
