@@ -1,4 +1,4 @@
-import {Controller, Post} from '@nestjs/common';
+import {Body, Controller, Post} from '@nestjs/common';
 import {TaskDto} from './task.dto';
 import {TaskService} from 'src/modules/telegram_ai_feature_module/task/services/task.service';
 
@@ -6,13 +6,8 @@ import {TaskService} from 'src/modules/telegram_ai_feature_module/task/services/
 export class TaskController {
 	constructor(private taskService: TaskService) {}
 
-	@Post()
-	async createTasks(taskDto: TaskDto): Promise<any> {
-		return await this.taskService.createTask(taskDto);
+	@Post('create')
+	async create(@Body() taskDTO: TaskDto) {
+		return await this.taskService.createTask(taskDTO);
 	}
-
-	// @Post('ai')
-	// async aiEndPoint(dto: AiDto): Promise<any> {
-	// 	return await this.taskService.createTask(dto);
-	// }
 }

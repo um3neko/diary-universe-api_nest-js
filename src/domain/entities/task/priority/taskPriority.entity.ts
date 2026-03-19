@@ -34,15 +34,14 @@ export const TaskPriorityConfig = {
 type TaskPriorityCode = TaskPriorityEnum;
 
 export class TaskPriority extends BaseDomainLookupEntity {
-	private constructor(id: string, createdAt: Date, updatedAt: Date, code: TaskPriorityCode, value: string) {
-		super(id, createdAt, updatedAt, code, value);
+	private constructor(id: string, code: TaskPriorityCode, value: string) {
+		super(id, code, value);
 	}
 
 	public static create(code: TaskPriorityCode): TaskPriority {
 		const id = crypto.randomUUID();
-		const now = new Date();
 		const config = TaskPriorityConfig[code];
-		return new TaskPriority(id, now, now, config.code, config.value);
+		return new TaskPriority(id, config.code, config.value);
 	}
 
 	public static restore(props: {
@@ -52,6 +51,6 @@ export class TaskPriority extends BaseDomainLookupEntity {
 		code: TaskPriorityCode;
 	}): TaskPriority {
 		const config = TaskPriorityConfig[props.code];
-		return new TaskPriority(props.id, props.createdAt, props.updatedAt, props.code, config.value);
+		return new TaskPriority(props.id, props.code, config.value);
 	}
 }

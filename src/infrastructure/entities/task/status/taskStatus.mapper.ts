@@ -6,8 +6,6 @@ export class TaskStatusMapper {
 		if (!orm) return null as any;
 		return TaskStatus.restore({
 			id: orm.id,
-			createdAt: orm.createdAt,
-			updatedAt: orm.updatedAt,
 			code: orm.code as TaskStatusEnum,
 		});
 	}
@@ -16,8 +14,6 @@ export class TaskStatusMapper {
 		if (!domain) return null as any;
 		const orm = new TaskStatusOrmEntity();
 		orm.id = domain.id;
-		orm.createdAt = domain.createdAt;
-		orm.updatedAt = domain.updatedAt;
 		orm.code = domain.code;
 		orm.value = domain.value;
 		return orm;

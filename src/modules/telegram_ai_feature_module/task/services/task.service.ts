@@ -21,6 +21,7 @@ export class TaskService {
 			tags: taskDTO.tags || [],
 			prompt: taskDTO.prompt,
 		});
+		console.log(task);
 		await this.taskRepository.save(task);
 	}
 }

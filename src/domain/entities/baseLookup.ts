@@ -1,13 +1,8 @@
-import {BaseDomainEntity} from './baseEntity';
-
-export abstract class BaseDomainLookupEntity extends BaseDomainEntity {
+export abstract class BaseDomainLookupEntity {
+	id: string;
 	constructor(
 		id: string,
-		createdAt: Date,
-		updatedAt: Date,
 		public code: string,
 		public value: string,
-	) {
-		super(id, createdAt, updatedAt);
-	}
+	) {}
 }

@@ -1,4 +1,7 @@
-import {TaskPriority, TaskPriorityEnum} from 'src/domain/entities/task/priority/taskPriority.entity';
+import {
+	TaskPriority,
+	TaskPriorityEnum,
+} from 'src/domain/entities/task/priority/taskPriority.entity';
 import {TaskPriorityOrmEntity} from './taskPriority.typeorm';
 
 export class TaskPriorityMapper {
@@ -16,8 +19,6 @@ export class TaskPriorityMapper {
 		if (!domain) return null as any;
 		const orm = new TaskPriorityOrmEntity();
 		orm.id = domain.id;
-		orm.createdAt = domain.createdAt;
-		orm.updatedAt = domain.updatedAt;
 		orm.code = domain.code;
 		orm.value = domain.value;
 		return orm;

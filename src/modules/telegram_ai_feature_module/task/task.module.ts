@@ -7,7 +7,6 @@ import {TaskStatusOrmEntity} from 'src/infrastructure/entities/task/status/taskS
 import {TaskOrmEntity} from 'src/infrastructure/entities/task/task.typeorm';
 import {TagOrmEntity} from 'src/infrastructure/entities/task/tag/tag.typeorm';
 import {TypeOrmTaskRepository} from 'src/infrastructure/entities/task/task.typeorm.repository';
-import {ITaskRepository} from 'src/domain/entities/task/task.irepository';
 
 @Module({
 	imports: [

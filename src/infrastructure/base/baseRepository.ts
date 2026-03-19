@@ -14,6 +14,7 @@ export class BaseRepository<OrmEntity extends ObjectLiteral, DomainEntity> {
 
 	async save(entity: DomainEntity): Promise<void> {
 		const ormEntity = this.mapper.toOrm(entity);
+		console.log(ormEntity);
 		await this.repo.save(ormEntity);
 	}
 

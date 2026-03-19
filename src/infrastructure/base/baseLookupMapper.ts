@@ -4,20 +4,12 @@ import {BaseLookupOrmEntity} from 'src/infrastructure/base/baseLookupOrmEntity';
 export abstract class BaseLookupMapper {
 	static toDomain<T extends BaseDomainLookupEntity>(
 		orm: BaseLookupOrmEntity | null,
-		factory: (props: {
-			id: string;
-			createdAt: Date;
-			updatedAt: Date;
-			code: string;
-			value: string;
-		}) => T,
+		factory: (props: {id: string; code: string; value: string}) => T,
 	): T | null {
 		if (!orm) return null;
 
 		return factory({
 			id: orm.id,
-			createdAt: orm.createdAt,
-			updatedAt: orm.updatedAt,
 			code: orm.code,
 			value: orm.value,
 		});
@@ -30,9 +22,8 @@ export abstract class BaseLookupMapper {
 		if (!domain) return null;
 
 		const orm = new ormClass();
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		orm.id = domain.id;
-		orm.createdAt = domain.createdAt;
-		orm.updatedAt = domain.updatedAt;
 		orm.code = domain.code;
 		orm.value = domain.value;
 		return orm;

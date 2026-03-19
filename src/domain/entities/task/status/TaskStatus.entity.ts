@@ -19,24 +19,18 @@ export const TaskStatusConfig = {
 type TaskStatusCode = TaskStatusEnum;
 
 export class TaskStatus extends BaseDomainLookupEntity {
-	private constructor(id: string, createdAt: Date, updatedAt: Date, code: TaskStatusCode, value: string) {
-		super(id, createdAt, updatedAt, code, value);
+	private constructor(id: string, code: TaskStatusCode, value: string) {
+		super(id, code, value);
 	}
 
 	public static create(code: TaskStatusEnum): TaskStatus {
 		const id = crypto.randomUUID();
-		const now = new Date();
 		const config = TaskStatusConfig[code];
-		return new TaskStatus(id, now, now, config.code, config.value);
+		return new TaskStatus(id, config.code, config.value);
 	}
 
-	public static restore(props: {
-		id: string;
-		createdAt: Date;
-		updatedAt: Date;
-		code: TaskStatusCode;
-	}): TaskStatus {
+	public static restore(props: {id: string; code: TaskStatusCode}): TaskStatus {
 		const config = TaskStatusConfig[props.code];
-		return new TaskStatus(props.id, props.createdAt, props.updatedAt, props.code, config.value);
+		return new TaskStatus(props.id, props.code, config.value);
 	}
 }

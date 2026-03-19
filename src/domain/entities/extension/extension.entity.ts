@@ -1,15 +1,8 @@
-
-import { BaseDomainLookupEntity } from '../baseLookup';
+import {BaseDomainLookupEntity} from '../baseLookup';
 
 export class Extension extends BaseDomainLookupEntity {
-	constructor(
-		id: string,
-		createdAt: Date,
-		updatedAt: Date,
-		code: string,
-		value: string
-	) {
-		super(id, createdAt, updatedAt, code, value);
+	constructor(id: string, code: string, value: string) {
+		super(id, code, value);
 	}
 
 	static restore(props: {
@@ -19,6 +12,6 @@ export class Extension extends BaseDomainLookupEntity {
 		code: string;
 		value: string;
 	}): Extension {
-		return new Extension(props.id, props.createdAt, props.updatedAt, props.code, props.value);
+		return new Extension(props.id, props.code, props.value);
 	}
 }
