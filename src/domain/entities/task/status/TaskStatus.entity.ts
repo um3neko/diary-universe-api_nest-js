@@ -1,22 +1,42 @@
-import { BaseDomainEntity } from "../../baseEntity";
+import {BaseDomainLookupEntity} from '../../baseLookup';
 
 export enum TaskStatusEnum {
-  PENDING = "pending",
-  DONE = "done",
+	TODO = 'todo',
+	DONE = 'done',
 }
 
-export class TaskStatus extends BaseDomainEntity {
-  private constructor(id: string, createdAt: Date, updatedAt: Date, public readonly status: TaskStatusEnum) {
-    super(id, createdAt, updatedAt);
-  }
+export const TaskStatusConfig = {
+	[TaskStatusEnum.TODO]: {
+		value: '1',
+		code: TaskStatusEnum.TODO,
+	},
+	[TaskStatusEnum.DONE]: {
+		value: '2',
+		code: TaskStatusEnum.DONE,
+	},
+} as const;
 
-  public static create(status: TaskStatusEnum): TaskStatus {
-    const id = crypto.randomUUID();
-    const now = new Date();
-    return new TaskStatus(id, now, now, status);
-  }
+type TaskStatusCode = TaskStatusEnum;
 
-  public static restore(id: string, createdAt: Date, updatedAt: Date, status: TaskStatusEnum): TaskStatus {
-    return new TaskStatus(id, createdAt, updatedAt, status);
-  }
+export class TaskStatus extends BaseDomainLookupEntity {
+	private constructor(id: string, createdAt: Date, updatedAt: Date, code: TaskStatusCode, value: string) {
+		super(id, createdAt, updatedAt, code, value);
+	}
+
+	public static create(code: TaskStatusEnum): TaskStatus {
+		const id = crypto.randomUUID();
+		const now = new Date();
+		const config = TaskStatusConfig[code];
+		return new TaskStatus(id, now, now, config.code, config.value);
+	}
+
+	public static restore(props: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		code: TaskStatusCode;
+	}): TaskStatus {
+		const config = TaskStatusConfig[props.code];
+		return new TaskStatus(props.id, props.createdAt, props.updatedAt, props.code, config.value);
+	}
 }

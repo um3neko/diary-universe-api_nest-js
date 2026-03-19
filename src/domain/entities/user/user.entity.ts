@@ -49,6 +49,10 @@ export class User extends BaseDomainEntity {
 		return await argon2.verify(this.password, password);
 	}
 
+	public getPasswordHash(): string {
+		return this.password;
+	}
+
 	changeEmail(newEmail: string): void {
 		this.email = newEmail;
 		this.touch();

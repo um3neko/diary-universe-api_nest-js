@@ -20,7 +20,7 @@ export class UserMapper {
 		orm.id = domain.id;
 		orm.username = domain.username;
 		orm.email = domain.email;
-		orm.password = (domain as any).password; // Access private property
+		orm.password = domain.getPasswordHash();
 		orm.createdAt = domain.createdAt;
 		orm.updatedAt = domain.updatedAt;
 		return orm;

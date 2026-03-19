@@ -9,14 +9,10 @@
 		"build": "nest build",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
 		"start": "nest start",
-
 		"typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource ./src/infrastructure/data-source.ts",
-
 		"m1": "npm run typeorm -- migration:generate ./src/infrastructure/migrations/mig",
 		"m2": "npm run typeorm -- migration:run",
 		"dev": "nest start --watch",
-
-
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -36,6 +32,7 @@
 		"@nestjs/swagger": "^11.2.0",
 		"@nestjs/typeorm": "^11.0.0",
 		"argon2": "^0.43.1",
+		"class-validator": "^0.14.4",
 		"crypto": "^1.0.1",
 		"passport": "^0.7.0",
 		"passport-jwt": "^4.0.1",

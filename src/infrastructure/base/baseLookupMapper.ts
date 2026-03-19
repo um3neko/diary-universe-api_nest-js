@@ -19,7 +19,7 @@ export abstract class BaseLookupMapper {
 			createdAt: orm.createdAt,
 			updatedAt: orm.updatedAt,
 			code: orm.code,
-			value: orm.description,
+			value: orm.value,
 		});
 	}
 
@@ -34,7 +34,7 @@ export abstract class BaseLookupMapper {
 		orm.createdAt = domain.createdAt;
 		orm.updatedAt = domain.updatedAt;
 		orm.code = domain.code;
-		orm.description = domain.value;
+		orm.value = domain.value;
 		return orm;
 	}
 }

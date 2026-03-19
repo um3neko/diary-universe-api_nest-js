@@ -1,16 +1,5 @@
-import { BaseOrmEntity } from "src/infrastructure/base/baseOrmEntity";
-import { Entity, Column, OneToMany } from "typeorm";
-import { TaskPriorityValueOrmEntity } from "../priorityValue/taskPriorityValue.typeorm";
+import {Entity} from 'typeorm';
+import {BaseLookupOrmEntity} from 'src/infrastructure/base/baseLookupOrmEntity';
 
-@Entity("task_priority")
-export class TaskPriorityOrmEntity extends BaseOrmEntity {
-
-  @Column()
-  title: string;
-
-  @Column()
-  level: number;
-
-  @OneToMany(() => TaskPriorityValueOrmEntity, (value) => value.priority)
-  values: TaskPriorityValueOrmEntity[];
-}
+@Entity('task_priority_lookup')
+export class TaskPriorityOrmEntity extends BaseLookupOrmEntity {}

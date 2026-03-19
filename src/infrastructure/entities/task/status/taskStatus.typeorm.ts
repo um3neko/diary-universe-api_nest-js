@@ -1,16 +1,5 @@
-import { BaseOrmEntity } from "src/infrastructure/base/baseOrmEntity";
-import { Entity, Column, OneToMany } from "typeorm";
-import { TaskStatusValueOrmEntity } from "../statusValue/taskStatusValue.typeorm";
+import {Entity} from 'typeorm';
+import {BaseLookupOrmEntity} from 'src/infrastructure/base/baseLookupOrmEntity';
 
-@Entity('task_status')
-export class TaskStatusOrmEntity extends BaseOrmEntity {
-	@Column()
-	  title: string;
-
-	  @Column()
-	  level: number;
-
-	  @OneToMany(() => TaskStatusValueOrmEntity, (value) => value.status)
-	  statusValues: TaskStatusValueOrmEntity[];
-
-}
+@Entity('task_status_lookup')
+export class TaskStatusOrmEntity extends BaseLookupOrmEntity {}

@@ -1,7 +1,7 @@
 import {Controller, Get, Query} from '@nestjs/common';
-import {BookChunksPreviewDtoResponse, BookPreviewDtoResponse} from '../../dto/bookPreviewDtoResponse';
+import {BookPreviewDtoResponse} from '../../dto/bookPreviewDtoResponse';
 import {BookService} from '../../services/book/book.service';
-import { BookChapterOrmEntity } from 'src/infrastructure/entities/bookChapter/bookChapter.typeorm';
+import {BookChapterOrmEntity} from 'src/infrastructure/entities/bookChapter/bookChapter.typeorm';
 
 @Controller('book')
 export class BookController {
@@ -18,9 +18,7 @@ export class BookController {
 	}
 
 	@Get('preview/')
-	async getBookChunksPreview(
-		@Query('id') id
-	): Promise<BookChapterOrmEntity[]> {
+	async getBookChunksPreview(@Query('id') id): Promise<BookChapterOrmEntity[]> {
 		console.log(id);
 		return this.bookService.getBookChunksById(id);
 	}

@@ -1,5 +1,31 @@
 import {BaseDomainEntity} from '../baseEntity';
 
+export class Word extends BaseDomainEntity {
+	private constructor(
+		id: string,
+		createdAt: Date,
+		updatedAt: Date,
+		public text: string,
+	) {
+		super(id, createdAt, updatedAt);
+	}
+
+	static create(props: { text: string }): Word {
+		const id = crypto.randomUUID();
+		const now = new Date();
+		return new Word(id, now, now, props.text);
+	}
+
+	static restore(props: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		text: string;
+	}): Word {
+		return new Word(props.id, props.createdAt, props.updatedAt, props.text);
+	}
+}
+
 export class WordContext extends BaseDomainEntity {
 	private constructor(
 		id: string,

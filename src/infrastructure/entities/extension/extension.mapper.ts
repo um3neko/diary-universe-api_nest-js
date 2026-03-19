@@ -9,7 +9,7 @@ export class ExtensionMapper {
       createdAt: orm.createdAt,
       updatedAt: orm.updatedAt,
       code: orm.code,
-      value: orm.description,
+      value: orm.value,
     });
   }
 
@@ -20,7 +20,7 @@ export class ExtensionMapper {
     orm.createdAt = domain.createdAt;
     orm.updatedAt = domain.updatedAt;
     orm.code = domain.code;
-    orm.description = domain.value;
+    orm.value = domain.value;
     return orm;
   }
 }

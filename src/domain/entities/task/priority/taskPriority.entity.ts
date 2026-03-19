@@ -1,47 +1,57 @@
-import { BaseDomainEntity } from "../../baseEntity";
+import {BaseDomainLookupEntity} from '../../baseLookup';
 
-export enum PriorityLevel {
-  VERY_LOW = 1,   // Слабо
-  LOW = 2,        // Немного
-  MEDIUM = 3,     // Средне
-  HIGH = 4,       // Сильно
-  VERY_HIGH = 5   // Очень сильно
+export enum TaskPriorityEnum {
+	VERY_LOW = 'very_low',
+	LOW = 'low',
+	MEDIUM = 'medium',
+	HIGH = 'high',
+	VERY_HIGH = 'very_high',
 }
 
-export class TaskPriority extends BaseDomainEntity {
-  private constructor(
-    id: string,
-    createdAt: Date,
-    updatedAt: Date,
-    public readonly level: PriorityLevel
-  ) {
-    super(id, createdAt, updatedAt);
-  }
+export const TaskPriorityConfig = {
+	[TaskPriorityEnum.VERY_LOW]: {
+		value: '1',
+		code: TaskPriorityEnum.VERY_LOW,
+	},
+	[TaskPriorityEnum.LOW]: {
+		value: '2',
+		code: TaskPriorityEnum.LOW,
+	},
+	[TaskPriorityEnum.MEDIUM]: {
+		value: '3',
+		code: TaskPriorityEnum.MEDIUM,
+	},
+	[TaskPriorityEnum.HIGH]: {
+		value: '4',
+		code: TaskPriorityEnum.HIGH,
+	},
+	[TaskPriorityEnum.VERY_HIGH]: {
+		value: '5',
+		code: TaskPriorityEnum.VERY_HIGH,
+	},
+} as const;
 
-  public static create(level: PriorityLevel): TaskPriority {
-    const id = crypto.randomUUID();
-    const now = new Date();
-    return new TaskPriority(id, now, now, level);
-  }
+type TaskPriorityCode = TaskPriorityEnum;
 
-  public static restore(
-    id: string,
-    createdAt: Date,
-    updatedAt: Date,
-    level: PriorityLevel
-  ): TaskPriority {
-    return new TaskPriority(id, createdAt, updatedAt, level);
-  }
+export class TaskPriority extends BaseDomainLookupEntity {
+	private constructor(id: string, createdAt: Date, updatedAt: Date, code: TaskPriorityCode, value: string) {
+		super(id, createdAt, updatedAt, code, value);
+	}
 
-  // типо ))0
-  // надо локализацию
-  public getLabel(): string {
-    switch (this.level) {
-      case PriorityLevel.VERY_LOW: return "Слабо";
-      case PriorityLevel.LOW: return "Немного";
-      case PriorityLevel.MEDIUM: return "Средне";
-      case PriorityLevel.HIGH: return "Сильно";
-      case PriorityLevel.VERY_HIGH: return "Очень сильно";
-    }
-  }
+	public static create(code: TaskPriorityCode): TaskPriority {
+		const id = crypto.randomUUID();
+		const now = new Date();
+		const config = TaskPriorityConfig[code];
+		return new TaskPriority(id, now, now, config.code, config.value);
+	}
+
+	public static restore(props: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		code: TaskPriorityCode;
+	}): TaskPriority {
+		const config = TaskPriorityConfig[props.code];
+		return new TaskPriority(props.id, props.createdAt, props.updatedAt, props.code, config.value);
+	}
 }
