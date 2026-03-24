@@ -1,47 +1,23 @@
+import {TaskPriorityMap} from 'src/infrastructure/seedService/constant';
 import {BaseDomainLookupEntity} from '../../baseLookup';
-
-export enum TaskPriorityEnum {
-	VERY_LOW = 'very_low',
-	LOW = 'low',
-	MEDIUM = 'medium',
-	HIGH = 'high',
-	VERY_HIGH = 'very_high',
-}
-
-export const TaskPriorityConfig = {
-	[TaskPriorityEnum.VERY_LOW]: {
-		value: '1',
-		code: TaskPriorityEnum.VERY_LOW,
-	},
-	[TaskPriorityEnum.LOW]: {
-		value: '2',
-		code: TaskPriorityEnum.LOW,
-	},
-	[TaskPriorityEnum.MEDIUM]: {
-		value: '3',
-		code: TaskPriorityEnum.MEDIUM,
-	},
-	[TaskPriorityEnum.HIGH]: {
-		value: '4',
-		code: TaskPriorityEnum.HIGH,
-	},
-	[TaskPriorityEnum.VERY_HIGH]: {
-		value: '5',
-		code: TaskPriorityEnum.VERY_HIGH,
-	},
-} as const;
+import {TaskPriorityEnum} from './taskPriority.enum';
 
 type TaskPriorityCode = TaskPriorityEnum;
 
 export class TaskPriority extends BaseDomainLookupEntity {
-	private constructor(id: string, code: TaskPriorityCode, value: string) {
+	private constructor(
+		id: string,
+		code: TaskPriorityCode,
+		value: string,
+		public emojiCode?: string,
+	) {
 		super(id, code, value);
 	}
 
 	public static create(code: TaskPriorityCode): TaskPriority {
 		const id = crypto.randomUUID();
-		const config = TaskPriorityConfig[code];
-		return new TaskPriority(id, config.code, config.value);
+		const config = TaskPriorityMap[code];
+		return new TaskPriority(id, config.code, config.value, config.emojiCode);
 	}
 
 	public static restore(props: {
@@ -49,8 +25,14 @@ export class TaskPriority extends BaseDomainLookupEntity {
 		createdAt: Date;
 		updatedAt: Date;
 		code: TaskPriorityCode;
+		emojiCode?: string;
 	}): TaskPriority {
-		const config = TaskPriorityConfig[props.code];
-		return new TaskPriority(props.id, props.code, config.value);
+		const config = TaskPriorityMap[props.code];
+		return new TaskPriority(props.id, props.code, config.value, props.emojiCode);
+	}
+
+	public static get(code: TaskPriorityEnum): TaskPriority {
+		const config = TaskPriorityMap[code];
+		return new TaskPriority(config.id, config.code, config.value, config.emojiCode);
 	}
 }

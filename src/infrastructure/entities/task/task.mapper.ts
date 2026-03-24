@@ -17,6 +17,7 @@ export class TaskMapper {
 			priority: orm.priority ? TaskPriorityMapper.toDomain(orm.priority) : (null as any),
 			tags: orm.tags ? orm.tags.map(tag => TagMapper.toDomain(tag)) : [],
 			prompt: orm.prompt,
+			deadline: orm.deadline,
 		});
 	}
 
@@ -32,6 +33,8 @@ export class TaskMapper {
 		orm.priority = domain.priority ? TaskPriorityMapper.toOrm(domain.priority) : (null as any);
 		orm.tags = domain.tags ? domain.tags.map(tag => TagMapper.toOrm(tag)) : [];
 		orm.prompt = domain.prompt;
+		orm.deadline = domain.deadline;
+
 		return orm;
 	}
 }

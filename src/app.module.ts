@@ -5,6 +5,7 @@ import {AuthModule} from './modules/auth/auth.module';
 import {typeOrmConfig} from './infrastructure/typeorm.config';
 import {TaskModule} from './modules/telegram_ai_feature_module/task/task.module';
 import {BookModule} from './modules/reader_feature_module/book/book.module';
+import {SeedModule} from './infrastructure/seedService/seed.module';
 
 @Module({
 	imports: [
@@ -13,6 +14,7 @@ import {BookModule} from './modules/reader_feature_module/book/book.module';
 		}),
 		TypeOrmModule.forRoot(typeOrmConfig),
 		AuthModule,
+		SeedModule,
 		TaskModule,
 		BookModule,
 	],

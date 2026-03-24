@@ -6,8 +6,9 @@ import {ITaskRepository} from 'src/domain/entities/task/task.irepository';
 import {BaseRepository} from 'src/infrastructure/base/baseRepository';
 import {TaskMapper} from './task.mapper';
 import {TaskOrmEntity} from './task.typeorm';
-import {TaskStatusEnum} from 'src/domain/entities/task/status/TaskStatus.entity';
-import {TaskPriorityEnum} from 'src/domain/entities/task/priority/taskPriority.entity';
+import {TaskPriorityEnum} from 'src/domain/entities/task/priority/taskPriority.enum';
+import {TaskRecurrence} from 'src/domain/entities/task/taskRecurrence.entity';
+import {TaskStatusEnum} from 'src/domain/entities/task/status/taskStatus.enum';
 
 export const TypeOrmTaskRepositoryToken = Symbol('TypeOrmTaskRepository');
 
@@ -22,6 +23,21 @@ export class TypeOrmTaskRepository
 	) {
 		super(repo, TaskMapper);
 	}
+	updateTask(id: string, updateData: Partial<Task>): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+
+	findByName(id: string): Promise<Task | null> {
+		throw new Error('Method not implemented.');
+	}
+
+	completeTask(id: string, completedAt?: Date, note?: string): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+
+	updateRecurrence(id: string, recurrenceData: Partial<TaskRecurrence>): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
 
 	async findAll(page = 1, limit = 20): Promise<Task[]> {
 		const [ormTasks] = await this.repo.findAndCount({
@@ -30,6 +46,17 @@ export class TypeOrmTaskRepository
 			order: {createdAt: 'DESC'},
 			relations: ['status', 'priority', 'tags'],
 		});
+		return ormTasks.map(task => this.mapper.toDomain(task));
+	}
+
+	async findByDateRange(start: Date, end: Date): Promise<Task[]> {
+		const ormTasks = await this.repo
+			.createQueryBuilder('task')
+			.leftJoinAndSelect('task.status', 'status')
+			.leftJoinAndSelect('task.priority', 'priority')
+			.leftJoinAndSelect('task.tags', 'tags')
+			.where('task.deadline >= :start AND task.deadline < :end', {start, end})
+			.getMany();
 		return ormTasks.map(task => this.mapper.toDomain(task));
 	}
 

@@ -30,4 +30,7 @@ export class TaskOrmEntity extends BaseOrmEntity {
 		inverseJoinColumn: {name: 'tag_id'},
 	})
 	tags: TagOrmEntity[];
+
+	@Column({type: 'timestamp', nullable: true})
+	deadline?: Date;
 }

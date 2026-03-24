@@ -1,0 +1,14 @@
+export enum TaskTagEnum {
+	WORK = 'WORK',
+	STUDY = 'STUDY',
+	HEALTH = 'HEALTH',
+	SPORT = 'SPORT',
+	PERSONAL = 'PERSONAL',
+	FINANCE = 'FINANCE',
+	SOCIAL = 'SOCIAL',
+	PROJECT = 'PROJECT',
+	ROUTINE = 'ROUTINE',
+	IDEA = 'IDEA',
+	URGENT = 'URGENT',
+	HOME = 'HOME',
+}

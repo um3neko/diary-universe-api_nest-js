@@ -1,7 +1,8 @@
 import {BaseDomainEntity} from '../baseEntity';
+import {TaskStatus} from './status/taskStatus.entity';
 import {TaskPriority} from './priority/taskPriority.entity';
-import {TaskStatus} from './status/TaskStatus.entity';
 import {Tag} from './tag/tag.entity';
+import {TaskRecurrence} from './taskRecurrence.entity';
 
 export class Task extends BaseDomainEntity {
 	private constructor(
@@ -15,6 +16,7 @@ export class Task extends BaseDomainEntity {
 		public priority: TaskPriority,
 		public prompt: JSON,
 		public tags?: Tag[],
+		public deadline?: Date,
 	) {
 		super(id, createdAt, updatedAt);
 	}
@@ -26,6 +28,7 @@ export class Task extends BaseDomainEntity {
 		priority: TaskPriority;
 		tags?: Tag[];
 		prompt: JSON;
+		deadline?: Date;
 	}): Task {
 		const id = crypto.randomUUID();
 		const now = new Date();
@@ -39,6 +42,7 @@ export class Task extends BaseDomainEntity {
 			props.priority,
 			props.prompt,
 			props.tags || [],
+			props.deadline,
 		);
 	}
 
@@ -53,6 +57,7 @@ export class Task extends BaseDomainEntity {
 		priority: TaskPriority;
 		tags?: Tag[];
 		prompt: JSON;
+		deadline?: Date;
 	}): Task {
 		return new Task(
 			props.id,
@@ -64,6 +69,7 @@ export class Task extends BaseDomainEntity {
 			props.priority,
 			props.prompt,
 			props.tags || [],
+			props.deadline,
 		);
 	}
 }

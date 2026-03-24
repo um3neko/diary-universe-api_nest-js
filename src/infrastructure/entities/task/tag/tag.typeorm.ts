@@ -9,4 +9,10 @@ export class TagOrmEntity extends BaseOrmEntity {
 
 	@ManyToMany(() => TaskOrmEntity, task => task.tags)
 	tasks: TaskOrmEntity[];
+
+	@Column({type: 'varchar', nullable: true})
+	emojiCode: string;
+
+	@Column({type: 'varchar', unique: true})
+	code: string;
 }
